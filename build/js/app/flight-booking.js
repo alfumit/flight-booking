@@ -2,7 +2,13 @@
  * Created by Alex on 18.06.2017.
  */
 (function () {
-    angular.module('flightApp',['ui.router','adminPanel','passengerModule','seatModule','planeModule']);
+    angular.module('flightApp',[
+        'ui.router',
+        'loginModule',
+        'adminPanel',
+        'passengerModule',
+        'seatModule',
+        'planeModule']);
 })();
 /**
  * Created by Alex on 18.06.2017.
@@ -10,6 +16,14 @@
 (function () {
 	'use strict';
 	angular.module('adminPanel',[]);
+})();
+
+/**
+ * Created by Alex on 18.06.2017.
+ */
+(function () {
+	'use strict';
+	angular.module('loginModule',['dbWrite']);
 })();
 
 /**
@@ -40,6 +54,21 @@
  * Created by Alex on 18.06.2017.
  */
 (function () {
+	angular.module('dbWrite',[])
+	.factory('dbWrite', function dbWrite($http) {
+		return {
+			'login': function () {
+				alert("I work");
+				return $http.get("/")
+			}
+		}
+	})
+})();
+
+/**
+ * Created by Alex on 18.06.2017.
+ */
+(function () {
     'use strict';
     angular.module('flightApp')
         .config(function ($locationProvider, $urlRouterProvider, $urlMatcherFactoryProvider,$stateProvider) {
@@ -50,34 +79,64 @@
             });
             $stateProvider
             .state('main',{
-                'url': '/',
-                'template': `<h1> Hey I'm router state</h1>
-                   <h2>{{$ctrl.test}}</h2>
-                   <plane></plane>
-                `,
+                'abstract': true,
+                'template': `<site-master></site-master>`,
                 'controller': function () {
                     this.test = "And I'm it's controller data"
                 },
                 'controllerAs': '$ctrl'
             })
+            .state('login',{
+	            'parent': 'main',
+	            'url': '/',
+	            'template': `<login-page></login-page>`,
+            })
             .state('admin',{
+                'parent': 'main',
                 'url': '/admin',
                 'template': `<admin-panel></admin-panel>`,
             })
             .state('plane', {
+	            'parent': 'main',
                 'url': '/plane',
 	            'template': `<plane></plane>`
             })
             .state('seat', {
+	            'parent': 'main',
 	            'url': '/seat',
 	            'template': `<seat></seat>`
             })
             .state('passenger', {
+	            'parent': 'main',
                 'url': '/passenger',
                 'template': `<passenger></passenger>`
             })
 
         });
+})();
+
+/**
+ * Created by Alex on 18.06.2017.
+ */
+
+/**
+ * Created by Alex on 18.06.2017.
+ */
+(function () {
+	'use strict';
+	angular.module('loginModule')
+	.controller('loginController', loginController);
+
+	loginController.$inject = ['dbWrite'];
+
+	function loginController(dbWrite) {
+		this.login = () => {
+			dbWrite.login().then((response) => {
+				console.log('Still working on db connection',response);
+				this.data = response.data;
+			})
+		}
+	}
 })();
 
 /**
@@ -107,6 +166,17 @@
                 this.value = "test2"
             },
             "templateUrl": "app/modules/admin-panel/components/admin-panel-page/admin-panel.template.html"
+        })
+})();
+/**
+ * Created by Alex on 18.06.2017.
+ */
+(function () {
+    angular.module('loginModule')
+        .component("loginPage",{
+            "bindings": {},
+            "controller": 'loginController',
+            "templateUrl": "app/modules/login/components/login-page/login-page.template.html"
         })
 })();
 /**
@@ -147,4 +217,17 @@
             },
             "templateUrl": "app/modules/seat/components/seat-page/seat.template.html"
         })
+})();
+/**
+ * Created by Alex on 18.06.2017.
+ */
+(function () {
+	'use strict';
+	angular.module('flightApp')
+	.component('siteMaster',{
+		'templateUrl': 'app/modules/shared/component/site-master/site-master.template.js.html',
+		'controller': function () {
+
+		}
+	})
 })();

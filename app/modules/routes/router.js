@@ -12,29 +12,35 @@
             });
             $stateProvider
             .state('main',{
-                'url': '/',
-                'template': `<h1> Hey I'm router state</h1>
-                   <h2>{{$ctrl.test}}</h2>
-                   <plane></plane>
-                `,
+                'abstract': true,
+                'template': `<site-master></site-master>`,
                 'controller': function () {
                     this.test = "And I'm it's controller data"
                 },
                 'controllerAs': '$ctrl'
             })
+            .state('login',{
+	            'parent': 'main',
+	            'url': '/',
+	            'template': `<login-page></login-page>`,
+            })
             .state('admin',{
+                'parent': 'main',
                 'url': '/admin',
                 'template': `<admin-panel></admin-panel>`,
             })
             .state('plane', {
+	            'parent': 'main',
                 'url': '/plane',
 	            'template': `<plane></plane>`
             })
             .state('seat', {
+	            'parent': 'main',
 	            'url': '/seat',
 	            'template': `<seat></seat>`
             })
             .state('passenger', {
+	            'parent': 'main',
                 'url': '/passenger',
                 'template': `<passenger></passenger>`
             })
