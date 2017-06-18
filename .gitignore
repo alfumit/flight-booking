@@ -1,0 +1,5 @@
+/node_modules/
+.idea/flight-booking.iml
+.idea/modules.xml
+.idea/workspace.xml
+/package.json

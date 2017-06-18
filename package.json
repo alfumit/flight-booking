@@ -1,0 +1,43 @@
+{
+  "name": "flight-booking",
+  "version": "1.0.0",
+  "description": "This a flight booking application challange",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "grunt build",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alfumit/flight-booking.git"
+  },
+  "keywords": [
+    "passengers",
+    "planes",
+    "flight",
+    "booking",
+    "challange"
+  ],
+  "author": "Alexander Fedotov",
+  "dependencies": {
+    "angular": "1.5.11",
+    "@uirouter/angularjs": "^1.0.4npm"
+  },
+  "devDependencies": {
+    "bootstrap": "^3.3.7",
+    "express": "4.15.3",
+    "grunt": "^1.0.1",
+    "grunt-contrib-concat": "^1.0.1",
+    "grunt-contrib-jshint": "^1.1.0",
+    "grunt-contrib-uglify": "^3.0.1",
+    "grunt-contrib-watch": "^1.0.0",
+    "mongodb": "^2.2.28",
+    "mongoose": "^4.10.6"
+  },
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/alfumit/flight-booking/issues"
+  },
+  "homepage": "https://github.com/alfumit/flight-booking#readme"
+}
