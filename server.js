@@ -4,9 +4,9 @@
 var express = require('express'),
     http = require('http'),
     app = express(),
-    //router = require('./server/routes.js'),
-    mongoose = require('mongoose'),
-    socketio = require('socketio');
+    router = require('./server/routes.js'),
+    mongoose = require('mongoose');
+   // socketio = require('socketio');
 
 mongoose.connect('mongodb://localhost:27017/test');
 
@@ -16,7 +16,7 @@ app.use(function(req, res, next) {
     res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With, content-type, Authorization');
     next();
 });
-/*
+
 var db = mongoose.connection;
 db.on('error', function(err) {
     console.log('Database error:', err.message);
@@ -28,12 +28,12 @@ db.on('error', function(err) {
 db.once('open', function() {
     console.log('Database Connected');
 });
-*/
 
-//app.use(express.static(__dirname));
+
+app.use(express.static(__dirname));
 
 // Go to routing
-//app.use('/', router);
+app.use('/', router);
 
 app.all('*', function(req, res, next) {
     res.sendFile('index.html', { root: __dirname });
