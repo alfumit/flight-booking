@@ -4,6 +4,7 @@
 var express = require('express'),
     http = require('http'),
     app = express(),
+    router = require('server/routes.js');
     mongoose = require('mongoose'),
     socketio = require('socketio');
 
@@ -30,6 +31,9 @@ db.once('open', function() {
 
 
 app.use(express.static(__dirname));
+
+// Go to routing
+app.use('/', router);
 
 app.all('*', function(req, res, next) {
     res.sendFile('index.html', { root: __dirname });
