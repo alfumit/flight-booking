@@ -4,7 +4,8 @@
 var express = require('express'),
     http = require('http'),
     app = express(),
-    mongoose = require('mongoose');
+    mongoose = require('mongoose'),
+    socketio = require('socketio');
 
 mongoose.connect('mongodb://localhost:27017/test');
 
