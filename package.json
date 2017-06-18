@@ -25,6 +25,7 @@
     "@uirouter/angularjs": "^1.0.4npm"
   },
   "devDependencies": {
+    "bluebird": "^3.5.0",
     "bootstrap": "^3.3.7",
     "express": "4.15.3",
     "grunt": "^1.0.1",

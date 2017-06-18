@@ -13,9 +13,10 @@ Current status of the task:
  - css in place
  - login page fully created
  - server part initial setup done
+ - mongoDB schemas finalized
  ===============================
 
  To be done:
- - server part finaliztaion (mongo schemas and API's)
+ - server part finaliztaion (API's)
  - "plane view" aka seat selection page to be done
- - "seat view" aka booking page to be doneg
+ - "seat view" aka booking page to be done
