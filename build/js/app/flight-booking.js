@@ -58,7 +58,7 @@
 	.factory('dbWrite', function dbWrite($http) {
 		return {
 			'login': function () {
-				alert("I work");
+				console.log("Need more time for DB connectivity")
 				return $http.get("/")
 			}
 		}

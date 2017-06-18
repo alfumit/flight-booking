@@ -5,3 +5,17 @@ To instantiate:
 - execute: npm install
 - execute: grunt build
 - open localhost: 3000
+
+Current status of the task:
+ - routes structure done
+ - login page created
+ - basic build process set up
+ - css in place
+ - login page fully created
+ - server part initial setup done
+ ===============================
+
+ To be done:
+ - server part finaliztaion (mongo schemas and API's)
+ - "plane view" aka seat selection page to be done
+ - "seat view" aka booking page to be doneg
