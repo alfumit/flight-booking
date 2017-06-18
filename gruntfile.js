@@ -19,11 +19,11 @@ module.exports = function(grunt) {
         },
         concat: {
              vendor: {
-                     src: ['node_modules/angular/angular.js'],
+                     src: ['node_modules/angular/angular.js','node_modules/@uirouter/angularjs/release/angular-ui-router.js'],
                      dest: 'build/js/app/vendor.js'
              },
              app: {
-                    src: ['app/**/*.module.js', 'app/**/*.controller.js','app/**/*.component.js'],
+                    src: ['app/**/*.module.js', 'app/modules/routes/router.js', 'app/**/*.controller.js','app/**/*.component.js'],
                     dest: 'build/js/app/flight-booking.js'
             }
         },
@@ -42,7 +42,7 @@ module.exports = function(grunt) {
            //  },
             con: {
                 files: ['app/**/*.js'],
-                tasks: ['jshint']
+                tasks: ['concat']
             }
         }
     });
