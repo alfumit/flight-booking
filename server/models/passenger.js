@@ -3,15 +3,15 @@
  */
 'use strict';
 
-var mongoose = require('mongoose');
+let mongoose = require('mongoose');
 mongoose.Promise = require('bluebird');
 
-var passengerSchema = mongoose.Schema({
+let passengerSchema = mongoose.Schema({
 	'id': Number,
 	'chose-plane': String,
 	'seat': Number
 });
 
-var Passenger = mongoose.model('Passenger', passengerSchema);
+let Passenger = mongoose.model('Passenger', passengerSchema);
 
 module.exports = Passenger;
