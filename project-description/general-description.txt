@@ -1,0 +1,15 @@
+User flow
+
+1. The user comes to the login screen:
+   - enters his/hers name
+   - a record is created in the db
+   - user is forwarded to the "plane view" state
+2. User comes to the "plane view" state:
+    - the live list of seats is displayed, based on data from db
+    - each seat has price, type (aisle,window,leg-room) and status shown
+    - each seat is clickable and let's the user pass into the seat booking state
+3. User comes to the seat booking state:
+    - detailed data on the seat is displayed, reserve and check-in buttons are available
+    - reserve button puts "reserved" flag on the seat and records the time of the operation.
+    - check-in button puts "checked-in" flag on the seat and the user is shown a thank you message, "hasCheckedIn" flag is given to the user
+    - after check-in the user is moved to the starting (login) screen of the application
