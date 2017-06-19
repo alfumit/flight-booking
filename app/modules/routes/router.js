@@ -8,7 +8,7 @@
             $urlMatcherFactoryProvider.strictMode(false);
             $locationProvider.html5Mode({ enabled: true, requireBase: true });
             $urlRouterProvider.otherwise(function ($injector) {
-            //    $state.go('main');
+                $state.go('main');
             });
             $stateProvider
             .state('main',{

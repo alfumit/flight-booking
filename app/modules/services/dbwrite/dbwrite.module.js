@@ -5,9 +5,9 @@
 	angular.module('dbWrite',[])
 	.factory('dbWrite', function dbWrite($http) {
 		return {
-			'login': function () {
-				console.log("Need more time for DB connectivity")
-				return $http.get("/")
+			'login': function (firstName,lastName,email) {
+				console.log("Creating new user");
+				return $http.post("/svc/add-passenger",{'firstName': firstName, 'lastName': lastName, 'email': email})
 			}
 		}
 	})

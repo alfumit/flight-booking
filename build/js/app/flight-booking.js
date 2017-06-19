@@ -57,9 +57,9 @@
 	angular.module('dbWrite',[])
 	.factory('dbWrite', function dbWrite($http) {
 		return {
-			'login': function () {
-				console.log("Need more time for DB connectivity")
-				return $http.get("/")
+			'login': function (firstName,lastName,email) {
+				console.log("Creating new user");
+				return $http.post("/svc/add-passenger",{'firstName': firstName, 'lastName': lastName, 'email': email})
 			}
 		}
 	})
@@ -75,7 +75,7 @@
             $urlMatcherFactoryProvider.strictMode(false);
             $locationProvider.html5Mode({ enabled: true, requireBase: true });
             $urlRouterProvider.otherwise(function ($injector) {
-            //    $state.go('main');
+                $state.go('main');
             });
             $stateProvider
             .state('main',{
@@ -131,7 +131,7 @@
 
 	function loginController(dbWrite) {
 		this.login = () => {
-			dbWrite.login().then((response) => {
+			dbWrite.login(this.firstName,this.lastName,this.email).then((response) => {
 				console.log('Still working on db connection',response);
 				this.data = response.data;
 			})

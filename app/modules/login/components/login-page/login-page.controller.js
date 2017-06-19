@@ -10,7 +10,7 @@
 
 	function loginController(dbWrite) {
 		this.login = () => {
-			dbWrite.login().then((response) => {
+			dbWrite.login(this.firstName,this.lastName,this.email).then((response) => {
 				console.log('Still working on db connection',response);
 				this.data = response.data;
 			})

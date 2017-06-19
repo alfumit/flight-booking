@@ -3,15 +3,18 @@
  */
 'use strict';
 
-var router = require('express').Router(),
+let router = require('express').Router(),
 	Passenger = require('./models/passenger.js'),
 	Plane = require('./models/plane.js'),
 	Seat = require('./models/seat.js');
 
 router.post('/svc/add-passenger', function(req, res) {
-	var item = new Passenger({
+	let item = new Passenger({
+		'firstName': req.body.firstName,
+		'lastName': req.body.lastName,
+		'email': req.body.email,
 		'chose-plane': req.body.plane,
-		'seat': req.body.seat
+		'seat': req.body.seat,
 	});
 	// Save Passenger
 	return item.save()
