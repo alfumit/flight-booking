@@ -9,11 +9,11 @@
     </div>
     <table class="table table-striped">
         <tr>
-            <th ng-repeat="row in $ctrl.rowArr">{{row}}</th>
+            <th ng-repeat="cols in $ctrl.planeArr[0]">{{$index}}</th>
         </tr>
-        <tr ng-repeat="col in $ctrl.seats">
-            <th>{{col}}</th>
-            <td ng-repeat="row in $ctrl.rowArr">{{col}}{{row}}</td>
+        <tr ng-repeat="row in $ctrl.planeArr">
+            <!--<th>{{col}}</th>-->
+            <td ng-repeat="col in row">{{col}}</td>
 
     </table>
 </div>

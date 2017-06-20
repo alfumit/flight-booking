@@ -178,26 +178,29 @@
 
 	planeController.$inject = ['dbWrite', '$state','$rootScope'];
 
-	function planeController(dbWrite,$state,$rootScope) {
+	function planeController(dbWrite,$rootScope) {
 		let seatVocabulary = 'abcdefghijklmnop';
 		this.$onInit = () => {
 			dbWrite.getPlane().then((response) => {
-				this.plane = {'rows': 20, 'seatsInRow': 5};
+				let i = 0, j = 0, seats, plane = {'rows': 20, 'seatsInRow': 5};
 				this.passenger = $rootScope.passenger;
 
-				this.seats = seatVocabulary.split("");
-				this.seats.length = this.plane.seatsInRow;
+				seats = seatVocabulary.split("");
+				seats.length = plane.seatsInRow;
 
-				this.rowArr = [];
-				for(let i = 0; i< this.plane.rows; i++) {
-					this.rowArr.push(i);
+
+				this.planeArr = new Array();
+				for (i = 0; i < plane.seatsInRow; i++) {
+					this.planeArr[i] = [];
+					for( j = 0; j < plane.rows; j++) {
+						this.planeArr[i].push(`${j}${seats[i]}`);
+					}
 				}
 			});
 		}
 
 	}
 })();
-
 /**
  * Created by Alex on 18.06.2017.
  */
