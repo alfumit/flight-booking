@@ -23,7 +23,7 @@ module.exports = function(grunt) {
                      dest: 'build/js/app/vendor.js'
              },
              app: {
-                    src: ['app/**/*.module.js', 'app/modules/routes/router.js', 'app/**/*.controller.js','app/**/*.component.js'],
+                    src: ['app/**/*.module.js', 'app/modules/routes/router.js', 'app/**/*.config.js', 'app/**/*.controller.js','app/**/*.component.js'],
                     dest: 'build/js/app/flight-booking.js'
             }
         },
@@ -48,12 +48,13 @@ module.exports = function(grunt) {
     });
 
     grunt.loadNpmTasks('grunt-contrib-concat');
+	grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.loadNpmTasks('grunt-contrib-watch');
 
 
     grunt.registerTask('default', ['jshint']);
-    grunt.registerTask('build', ['concat','uglify']);
+    grunt.registerTask('build', ['concat']);
 
 
 };

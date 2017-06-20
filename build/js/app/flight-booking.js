@@ -39,7 +39,7 @@
  */
 (function () {
 	'use strict';
-	angular.module('planeModule',[]);
+	angular.module('planeModule',['dbWrite']);
 })();
 
 /**
@@ -54,12 +54,18 @@
  * Created by Alex on 18.06.2017.
  */
 (function () {
+	"use strict";
 	angular.module('dbWrite',[])
 	.factory('dbWrite', function dbWrite($http) {
 		return {
 			'login': function (firstName,lastName,email) {
 				console.log("Creating new user");
-				return $http.post("/svc/add-passenger",{'firstName': firstName, 'lastName': lastName, 'email': email})
+				return $http.post("/svc/addpassenger",{firstName: firstName, lastName: lastName, email: email})
+			},
+			'getPlane': function (planeType) {
+				return $http.get('').then(() => {
+					return {'rows': 20, 'seatsInRow': 8}
+				})
 			}
 		}
 	})
@@ -116,6 +122,21 @@
 })();
 
 /**
+ * Created by Fedotov_Al on 20.06.2017.
+ */
+(function() {
+	'use strict';
+	angular.module('env.config', [])
+	.constant('ENV', (function() {
+		return {
+			'dev': '',
+			'prod': ''
+		};
+	})());
+
+})();
+
+/**
  * Created by Alex on 18.06.2017.
  */
 
@@ -127,13 +148,14 @@
 	angular.module('loginModule')
 	.controller('loginController', loginController);
 
-	loginController.$inject = ['dbWrite'];
+	loginController.$inject = ['dbWrite', '$state','$rootScope'];
 
-	function loginController(dbWrite) {
+	function loginController(dbWrite,$state,$rootScope) {
 		this.login = () => {
 			dbWrite.login(this.firstName,this.lastName,this.email).then((response) => {
-				console.log('Still working on db connection',response);
 				this.data = response.data;
+				$rootScope.passenger = this;
+				$state.go('plane', this.data);
 			})
 		}
 	}
@@ -146,6 +168,35 @@
 /**
  * Created by Alex on 18.06.2017.
  */
+/**
+ * Created by Alex on 18.06.2017.
+ */
+(function () {
+	'use strict';
+	angular.module('planeModule')
+	.controller('planeController', planeController);
+
+	planeController.$inject = ['dbWrite', '$state','$rootScope'];
+
+	function planeController(dbWrite,$state,$rootScope) {
+		let seatVocabulary = 'abcdefghijklmnop';
+		this.$onInit = () => {
+			dbWrite.getPlane().then((response) => {
+				this.plane = {'rows': 20, 'seatsInRow': 5};
+				this.passenger = $rootScope.passenger;
+
+				this.seats = seatVocabulary.split("");
+				this.seats.length = this.plane.seatsInRow;
+
+				this.rowArr = [];
+				for(let i = 0; i< this.plane.rows; i++) {
+					this.rowArr.push(i);
+				}
+			});
+		}
+
+	}
+})();
 
 /**
  * Created by Alex on 18.06.2017.
@@ -199,9 +250,7 @@
     angular.module('planeModule')
         .component("plane",{
             "bindings": {},
-            "controller": function () {
-                this.value = "test"
-            },
+            "controller": 'planeController',
             "templateUrl": "app/modules/plane/components/plane-page/plane.template.html"
         })
 })();

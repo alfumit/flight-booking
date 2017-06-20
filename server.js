@@ -1,10 +1,11 @@
 /**
  * Created by Alex on 18.06.2017.
  */
-var express = require('express'),
+let express = require('express'),
     http = require('http'),
     app = express(),
     router = require('./server/routes.js'),
+	bodyParser = require('body-parser'),
     mongoose = require('mongoose');
    // socketio = require('socketio');
 
@@ -17,7 +18,10 @@ app.use(function(req, res, next) {
     next();
 });
 
-var db = mongoose.connection;
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+
+let db = mongoose.connection;
 db.on('error', function(err) {
     console.log('Database error:', err.message);
     app.all('*', function(req, res) {
@@ -35,7 +39,7 @@ app.use(express.static(__dirname));
 // Go to routing
 app.use('/', router);
 
-app.all('*', function(req, res, next) {
+app.all('*', function(req, res) {
     res.sendFile('index.html', { root: __dirname });
 });
 

@@ -3,5 +3,5 @@
  */
 (function () {
 	'use strict';
-	angular.module('planeModule',[]);
+	angular.module('planeModule',['dbWrite']);
 })();

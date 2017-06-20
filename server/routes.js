@@ -8,18 +8,20 @@ let router = require('express').Router(),
 	Plane = require('./models/plane.js'),
 	Seat = require('./models/seat.js');
 
-router.post('/svc/add-passenger', function(req, res) {
+router.post('/svc/addpassenger', function(req, res) {
 	let item = new Passenger({
-		'firstName': req.body.firstName,
+		'firstName': req.firstName,
 		'lastName': req.body.lastName,
 		'email': req.body.email,
 		'chose-plane': req.body.plane,
 		'seat': req.body.seat,
 	});
+	//return res.status(200).send(req.body);
+
 	// Save Passenger
 	return item.save()
 	.then(function() {
-		return res.status(200).send();
+		return res.status(200).send("Saved");
 	})
 	.catch(function(err) {
 		console.log(err);

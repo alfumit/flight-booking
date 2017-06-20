@@ -1,3 +1,19 @@
 <div>
     <h1> Plane  </h1>
+    <h3>Dear, {{$ctrl.passenger.firstName || "tester"}}, please pick your seat</h3>
+    <div class="panel panel-default">
+        <div class="panel-heading">Plane configuration</div>
+        <div class="panel-body">
+            <pre>{{$ctrl.plane.rows}}</pre>
+        </div>
+    </div>
+    <table class="table table-striped">
+        <tr>
+            <th ng-repeat="row in $ctrl.rowArr">{{row}}</th>
+        </tr>
+        <tr ng-repeat="col in $ctrl.seats">
+            <th>{{col}}</th>
+            <td ng-repeat="row in $ctrl.rowArr">{{col}}{{row}}</td>
+
+    </table>
 </div>

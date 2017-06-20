@@ -5,9 +5,7 @@
     angular.module('planeModule')
         .component("plane",{
             "bindings": {},
-            "controller": function () {
-                this.value = "test"
-            },
+            "controller": 'planeController',
             "templateUrl": "app/modules/plane/components/plane-page/plane.template.html"
         })
 })();

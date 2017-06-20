@@ -6,13 +6,14 @@
 	angular.module('loginModule')
 	.controller('loginController', loginController);
 
-	loginController.$inject = ['dbWrite'];
+	loginController.$inject = ['dbWrite', '$state','$rootScope'];
 
-	function loginController(dbWrite) {
+	function loginController(dbWrite,$state,$rootScope) {
 		this.login = () => {
 			dbWrite.login(this.firstName,this.lastName,this.email).then((response) => {
-				console.log('Still working on db connection',response);
 				this.data = response.data;
+				$rootScope.passenger = this;
+				$state.go('plane', this.data);
 			})
 		}
 	}
